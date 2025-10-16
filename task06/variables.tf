@@ -37,6 +37,6 @@ variable "allowed_ip_address" {
 }
 
 variable "tags" {
-  type = map(string)
+  type    = map(string)
   default = { Creator = "maksim_isachenko1@epam.com" }
 }

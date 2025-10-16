@@ -1,7 +1,7 @@
 output "app_service_plan_id" {
-  value = azurerm_app_service_plan.asp[0].id
+  value = try(azurerm_service_plan.asp[0].id, var.app_service_plan_id)
 }
 
 output "app_hostname" {
-  value = azurerm_linux_web_app.app[0].default_site_hostname
+  value = var.app_name != "" ? "${var.app_name}.azurewebsites.net" : ""
 }

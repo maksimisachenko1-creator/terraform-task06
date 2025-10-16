@@ -7,7 +7,8 @@ variable "resource_group_name" {
 }
 
 variable "app_name" {
-  type = string
+  type    = string
+  default = ""
 }
 
 variable "asp_name" {
@@ -15,18 +16,19 @@ variable "asp_name" {
 }
 
 variable "sku_name" {
-  type = string
+  type    = string
   default = "P0v3"
 }
 
 variable "dotnet_version" {
-  type = string
+  type    = string
   default = "8.0"
 }
 
 variable "sql_connection_string" {
   type      = string
   sensitive = true
+  default   = ""
 }
 
 variable "create_only_plan" {
@@ -35,7 +37,7 @@ variable "create_only_plan" {
 }
 
 variable "app_service_plan_id" {
-  type = string
+  type    = string
   default = ""
 }
 

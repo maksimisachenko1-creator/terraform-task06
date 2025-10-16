@@ -29,19 +29,19 @@ module "sql" {
 module "webapp" {
   source = "./modules/webapp"
 
-  location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
-  app_service_plan_id = module.webapp_plan.app_service_plan_id
-  app_name            = local.app_name
-  asp_name            = local.asp_name
-  dotnet_version      = "8.0"
+  location              = var.location
+  resource_group_name   = azurerm_resource_group.rg.name
+  app_service_plan_id   = module.webapp_plan.app_service_plan_id
+  app_name              = local.app_name
+  asp_name              = local.asp_name
+  dotnet_version        = "8.0"
   sql_connection_string = module.sql.sql_connection_string
-  tags                = var.tags
+  tags                  = var.tags
 }
 
 /* Create App Service Plan using a small child module under webapp for clarity */
 module "webapp_plan" {
-  source = "./modules/webapp"
+  source           = "./modules/webapp"
   create_only_plan = true
 
   location            = var.location

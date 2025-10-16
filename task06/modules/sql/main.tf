@@ -1,7 +1,6 @@
 resource "random_password" "sql_admin" {
-  length           = 16
-  override_characters = "@#%&*-_+=[](){}<>?"
-  special          = true
+  length  = 16
+  special = true
 }
 
 resource "azurerm_mssql_server" "this" {
@@ -15,17 +14,17 @@ resource "azurerm_mssql_server" "this" {
 }
 
 resource "azurerm_mssql_firewall_rule" "allow_azure" {
-  name                = "allow_azure_services"
-  server_id           = azurerm_mssql_server.this.id
-  start_ip_address    = "0.0.0.0"
-  end_ip_address      = "0.0.0.0"
+  name             = "allow_azure_services"
+  server_id        = azurerm_mssql_server.this.id
+  start_ip_address = "0.0.0.0"
+  end_ip_address   = "0.0.0.0"
 }
 
 resource "azurerm_mssql_firewall_rule" "allow_ip" {
-  name                = "allow-verification-ip"
-  server_id           = azurerm_mssql_server.this.id
-  start_ip_address    = var.allowed_ip_address
-  end_ip_address      = var.allowed_ip_address
+  name             = "allow-verification-ip"
+  server_id        = azurerm_mssql_server.this.id
+  start_ip_address = var.allowed_ip_address
+  end_ip_address   = var.allowed_ip_address
 }
 
 resource "azurerm_mssql_database" "this" {
@@ -51,15 +50,6 @@ resource "azurerm_key_vault_secret" "sql_admin_password" {
 }
 
 locals {
-  fqdn = "${azurerm_mssql_server.this.fully_qualified_domain_name}"
+  fqdn = azurerm_mssql_server.this.fully_qualified_domain_name
 }
 
-output "sql_server_fqdn" {
-  value = local.fqdn
-}
-
-output "sql_connection_string" {
-  description = "ADO.NET connection string (sensitive)"
-  value       = "Server=${local.fqdn};Database=${azurerm_mssql_database.this.name};User Id=${var.sql_admin_username};Password=${random_password.sql_admin.result};Trusted_Connection=False;Encrypt=True;"
-  sensitive   = true
-}
