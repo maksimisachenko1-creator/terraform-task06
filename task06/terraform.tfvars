@@ -1,0 +1,7 @@
+location = "East US"
+name_prefix = "cmaz-ya42kk4d-mod6"
+existing_key_vault_resource_group = "cmaz-ya42kk4d-mod6-kv-rg"
+existing_key_vault_name = "cmaz-ya42kk4d-mod6-kv"
+rg_name = "cmaz-ya42kk4d-mod6-rg"
+sql_admin_username = "sqladmin"
+allowed_ip_address = "18.153.146.156"
